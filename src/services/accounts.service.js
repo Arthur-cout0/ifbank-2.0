@@ -18,12 +18,13 @@ export const getAccount = async() => {
   }
 }
 
-export const createAccount = () => {
+export const createAccount = (uid) => {
   const accountsCollection = collection(db, "accounts");
-  return addDoc(accountsCollection, {
+  console.log('conta criada')
+  addDoc(accountsCollection, {
     balance: 0,
     history: [],
-    userId: auth.currentUser.uid
+    userId: uid
   });
 }
 

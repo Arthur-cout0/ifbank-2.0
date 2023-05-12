@@ -1,9 +1,15 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
-const Home = () => {
+const Home = ({ navigation }) => {
+
+  const goToProfile = () => {
+    navigation.navigate("Profile")
+  }
+
   return (
     <View>
-      <Text>home</Text>
+      <Text>Home</Text>
+      <Button title="Ir para Profile" onPress={goToProfile}/>
     </View>
   );
 };

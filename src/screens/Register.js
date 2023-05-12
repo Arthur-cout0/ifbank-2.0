@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, Alert, TouchableOpacity } from "react-na
 import validator from "validator";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import * as SecureStore from 'expo-secure-store';
+import { createAccount } from '../services/accounts.service'
 
 const Register = ({ navigation }) => {
 
@@ -17,6 +18,7 @@ const Register = ({ navigation }) => {
     createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        createAccount(user.uid)
         console.log(user);
         SecureStore.setItemAsync("user", JSON.stringify(user));
       })
