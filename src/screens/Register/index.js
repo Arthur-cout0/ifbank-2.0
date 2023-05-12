@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, Alert, TouchableOpacity } from "react-na
 import validator from "validator";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import * as SecureStore from 'expo-secure-store';
-import { createAccount } from '../services/accounts.service'
+import { createAccount } from '../../services/accounts.service'
 
 const Register = ({ navigation }) => {
 
