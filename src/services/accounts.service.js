@@ -4,10 +4,14 @@ import { auth, db } from "../firebase/config";
 export const getAccount = async() => {
   const accountsCollection = collection(db, "accounts");
 
+  console.log(accountsCollection)
+
   let restricoes = [where("userId", "==", auth.currentUser.uid)];
   const q = query(accountsCollection, ...restricoes);
-
+  console.log(q)
   const account = await getDocs(q);
+
+  console.log(account)
 
   const dadosDaConta = account.data()
 
@@ -29,7 +33,7 @@ export const createAccount = (uid) => {
 }
 
 export const updateAccount = (id, balance, history) => {
-  return updateDoc(doc(db, "accounts", id), {
+  updateDoc(doc(db, "accounts", id), {
     balance: balance,
     history: history,
   });
