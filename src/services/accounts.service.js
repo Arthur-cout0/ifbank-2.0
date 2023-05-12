@@ -1,25 +1,21 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
 
-export const getAccount = async() => {
+export const getAccount = async () => {
   const accountsCollection = collection(db, "accounts");
-
-  console.log(accountsCollection)
 
   let restricoes = [where("userId", "==", auth.currentUser.uid)];
   const q = query(accountsCollection, ...restricoes);
-  console.log(q)
-  const account = await getDocs(q);
+  const accounts = await getDocs(q);
 
-  console.log(account)
+  const accountList = []
 
-  const dadosDaConta = account.data()
+  accounts.forEach((account) => {
+    const accountData = account.data()
+    accountList.push(accountData)
+  })
 
-  return {
-    userId: account.userId,
-    balance: dadosDaConta.balance,
-    history: dadosDaConta.history,
-  }
+  return accountList[0]
 }
 
 export const createAccount = (uid) => {
@@ -32,8 +28,16 @@ export const createAccount = (uid) => {
   });
 }
 
-export const updateAccount = (id, balance, history) => {
-  updateDoc(doc(db, "accounts", id), {
+export const updateAccount = async (id, balance, history) => {
+  const accounts = await getDocs(collection(db, "accounts"), where("userId", "==", id))
+
+  accountList = []
+
+  accounts.forEach((account) => {
+    accountList.push(account)
+  })
+
+  updateDoc(doc(db, "accounts", accountList[0].ref), {
     balance: balance,
     history: history,
   });

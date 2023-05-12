@@ -16,50 +16,26 @@ const Home = ({ navigation }) => {
   }, [])
 
   const loadAccount = async () => {
-    getAccount()
-      .then((account) => {
-        setAccount(account)
-      })
-      .catch((error) => {
-        console.log(error)
-        console.log(error.message)
-      })
-      .finally(() => {
-        setCarregando(false);
-      });
+    const accountData = await getAccount()
+    setAccount(accountData)
+    setCarregando(false)
   }
 
-  // const accountDeposit = (value) => {
-  //   updateAccount(user.uid, account.ballance + value, account.history)
-  //   .then(() => {
-  //     loadAccount()
-  //     Alert.alert('Aplicativo!', 'Depósito realizado com sucesso!', [
-  //       {text: 'OK', onPress: () => console.log('OK Pressed..')},
-  //     ]);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     Alert.alert('Aplicativo!', 'Algo deu errado :/', [
-  //       {text: 'OK', onPress: () => console.log('OK Pressed..')},
-  //     ]);
-  //   })
-  // }
+  const accountDeposit = (value) => {
+    updateAccount(user.uid, account.ballance + value, account.history)
+    loadAccount()
+    Alert.alert('Aplicativo!', 'Depósito realizado com sucesso!', [
+      {text: 'OK', onPress: () => console.log('OK Pressed..')},
+    ]);
+  }
 
-  // const accountWithdraw = (value) => {
-  //   updateAccount(user.uid, account.ballance - value, account.history)
-  //   .then(() => {
-  //     loadAccount()
-  //     Alert.alert('Aplicativo!', 'Saque realizado com sucesso!', [
-  //       {text: 'OK', onPress: () => console.log('OK Pressed..')},
-  //     ]);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     Alert.alert('Aplicativo!', 'Algo deu errado :/', [
-  //       {text: 'OK', onPress: () => console.log('OK Pressed..')},
-  //     ]);
-  //   })
-  // }
+  const accountWithdraw = (value) => {
+    updateAccount(user.uid, account.ballance - value, account.history)
+    loadAccount()
+    Alert.alert('Aplicativo!', 'Saque realizado com sucesso!', [
+      {text: 'OK', onPress: () => console.log('OK Pressed..')},
+    ]);
+  }
 
   const goToProfile = () => {
     navigation.navigate("Profile")
@@ -74,9 +50,9 @@ const Home = ({ navigation }) => {
   return (
     <View>
       <Text>Home</Text>
-      <View><Text>Saldo: {account.ballance}</Text></View>
-      {/* <Button title="Depositar R$10" onPress={accountDeposit(10)}/>
-      <Button title="Sacar R$10" onPress={accountWithdraw(10)}/> */}
+      <View><Text>Saldo:</Text><Text>{account.balance}</Text></View>
+      <Button title="Depositar R$10" onPress={accountDeposit(10)}/>
+      <Button title="Sacar R$10" onPress={accountWithdraw(10)}/>
       <Button title="Ir para Profile" onPress={goToProfile}/>
     </View>
   );
