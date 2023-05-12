@@ -22,6 +22,7 @@ const Login = ({ navigation }) => {
       })
       .catch((error) => {
         console.error(error);
+        console.log('Não foi possível fazer o login!')
         Alert.alert('Aplicativo', 'Não foi possível fazer o login!', [
           { text: 'OK', onPress: () => { } },
         ]);
