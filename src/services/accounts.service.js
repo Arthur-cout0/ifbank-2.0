@@ -36,11 +36,15 @@ export const updateAccount = async (id, balance, history) => {
   const q = query(accountsCollection, ...restricoes);
   const accounts = await getDocs(q);
 
-  console.log(accounts, accounts[0].data())
+  const accountArray = []
 
-  const account = accounts[0]
+  accounts.forEach((account) => {
+    accountArray.push(account)
+  }) 
 
-  const accountRef = await doc(db, "accounts", account.ref)
+  console.log(accountArray[0])
+
+  const accountRef = await doc(db, "accounts", accountArray[0].id)
 
   console.log('atualizou')
 
@@ -48,4 +52,22 @@ export const updateAccount = async (id, balance, history) => {
     balance: balance,
     history: history,
   });
+}
+
+export const accountDeposit = async (value) => {
+
+  const account = await getAccount()
+
+  console.log('depositou')
+
+  updateAccount(auth.currentUser.uid, account.balance + value, account.history)
+}
+
+export const accountWithdraw = async (value) => {
+
+  const account = await getAccount()
+
+  console.log('sacou')
+
+  updateAccount(auth.currentUser.uid, account.balance - value, account.history)
 }

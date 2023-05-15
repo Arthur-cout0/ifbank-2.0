@@ -3,6 +3,7 @@ import AppSignNavigation from './src/navigations/AppSignNavigation';
 import { auth } from "./src/firebase/config";
 import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from 'react';
+import { AccountProvider } from './src/contexts/accountContext';
 
 export default function App() {
 
@@ -20,7 +21,9 @@ export default function App() {
 
   if (user) {
     return (
-      <AppNavigation></AppNavigation>
+      <AccountProvider>
+            <AppNavigation></AppNavigation>
+      </AccountProvider>
     );
   } else {
     return (
