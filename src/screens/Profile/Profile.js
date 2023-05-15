@@ -1,18 +1,13 @@
 import { View, Text, Button } from "react-native";
-
-import { getAuth, signOut } from "firebase/auth";
+import * as SecureStore from 'expo-secure-store';
+import { getAuth } from "firebase/auth";
 
 const Profile = ({ navigation }) => {
   const firebaseAuth = getAuth()
 
-  const doSignOut = () => {
-    signOut(firebaseAuth)
-    .then(() => {
-      console.log('User signed out')
-    }).catch((error) => {
-      console.log(error)
-      console.log(error.message)
-    });
+  const doSignOut = async () => {
+    await SecureStore.deleteItemAsync("user");
+    await firebaseAuth.signOut();
   }
 
   const goToHome = () => {
