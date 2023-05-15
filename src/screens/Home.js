@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 const Home = ({ navigation }) => {
 
+  console.log('renderizou')
+
   const firebaseAuth = getAuth();
   const user = firebaseAuth.currentUser;
 
@@ -22,7 +24,8 @@ const Home = ({ navigation }) => {
   }
 
   const accountDeposit = (value) => {
-    updateAccount(user.uid, account.ballance + value, account.history)
+    console.log('depositou')
+    updateAccount(user.uid, account.balance + value, account.history)
     loadAccount()
     Alert.alert('Aplicativo!', 'Depósito realizado com sucesso!', [
       {text: 'OK', onPress: () => console.log('OK Pressed..')},
@@ -30,7 +33,8 @@ const Home = ({ navigation }) => {
   }
 
   const accountWithdraw = (value) => {
-    updateAccount(user.uid, account.ballance - value, account.history)
+    updateAccount(user.uid, account.balance - value, account.history)
+    
     loadAccount()
     Alert.alert('Aplicativo!', 'Saque realizado com sucesso!', [
       {text: 'OK', onPress: () => console.log('OK Pressed..')},
@@ -51,8 +55,8 @@ const Home = ({ navigation }) => {
     <View>
       <Text>Home</Text>
       <View><Text>Saldo:</Text><Text>{account.balance}</Text></View>
-      <Button title="Depositar R$10" onPress={accountDeposit(10)}/>
-      <Button title="Sacar R$10" onPress={accountWithdraw(10)}/>
+      <Button title="Depositar R$10" onPress={() => accountDeposit(10)}/>
+      <Button title="Sacar R$10" onPress={() => accountWithdraw(10)}/>
       <Button title="Ir para Profile" onPress={goToProfile}/>
     </View>
   );

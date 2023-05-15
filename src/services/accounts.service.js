@@ -29,15 +29,22 @@ export const createAccount = (uid) => {
 }
 
 export const updateAccount = async (id, balance, history) => {
-  const accounts = await getDocs(collection(db, "accounts"), where("userId", "==", id))
 
-  accountList = []
+  const accountsCollection = collection(db, "accounts");
 
-  accounts.forEach((account) => {
-    accountList.push(account)
-  })
+  let restricoes = [where("userId", "==", auth.currentUser.uid)];
+  const q = query(accountsCollection, ...restricoes);
+  const accounts = await getDocs(q);
 
-  updateDoc(doc(db, "accounts", accountList[0].ref), {
+  console.log(accounts, accounts[0].data())
+
+  const account = accounts[0]
+
+  const accountRef = await doc(db, "accounts", account.ref)
+
+  console.log('atualizou')
+
+  updateDoc(accountRef, {
     balance: balance,
     history: history,
   });
