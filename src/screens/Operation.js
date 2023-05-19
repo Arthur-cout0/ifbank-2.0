@@ -1,6 +1,7 @@
 import { View, Text, Button, Alert } from "react-native-web"
 import { useAccount } from "../contexts/accountContext/useAccount";
 import { accountDeposit, accountWithdraw } from "../services/accounts.service";
+import OperationForm from "../util/operationform";
 
 const Operation = ({ navigation }) => {
 
@@ -14,6 +15,9 @@ const Operation = ({ navigation }) => {
         await accountDeposit(value).then(() => {
             const newBalance = account.balance + 10
             setAccount({ useId: account.userId, history: account.history, balance: newBalance })
+            Alert.alert('Aplicativo!', 'Operação realizada com sucesso!', [
+                { text: 'OK', onPress: () => console.log('OK Pressed..') },
+            ]);
             goToHome()
         }).catch((error) => {
             console.log(error)
@@ -32,6 +36,9 @@ const Operation = ({ navigation }) => {
             await accountWithdraw(value).then(() => {
                 const newBalance = account.balance - 10
                 setAccount({ useId: account.userId, history: account.history, balance: newBalance })
+                Alert.alert('Aplicativo!', 'Operação realizada com sucesso!', [
+                    { text: 'OK', onPress: () => console.log('OK Pressed..') },
+                ]);
                 goToHome()
             }).catch((error) => {
                 console.log(error)
@@ -46,13 +53,14 @@ const Operation = ({ navigation }) => {
         <View>
             <Text>Operation</Text>
             <View>
-                <Text>Depósito</Text>
-                <Button title="Depositar R$10" onPress={() => doDeposit(10)} />
+                <Text>Saque</Text>
+                <OperationForm formAciton={() => {}}/>
             </View>
             <View>
-                <Text>Saque</Text>
-                <Button title="Sacar R$10" onPress={() => doWithdraw(10)} />
+                <Text>Depósito</Text>
+                <OperationForm formAction={() => {}}></OperationForm>
             </View>
+            <View><Text>Tranferência</Text></View>
         </View>
     )
 }
