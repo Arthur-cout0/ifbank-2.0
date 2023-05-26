@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function Transaction ({object}) {
+export default function Transaction ({ object }) {
     return (
         <View>
             <Text>{object.type}</Text>

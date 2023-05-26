@@ -3,7 +3,14 @@ import { Button, Text, View } from "react-native";
 
 export default function History({route, navigation }) {
 
-    const { transactions } = route.params
+    const { history } = route.params
+
+    const toArray = (object) => {
+        const values = Object.values(object)
+        return values
+    }
+
+    const transactions = toArray(history)
 
     console.log(transactions)
 

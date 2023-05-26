@@ -23,7 +23,8 @@ const Home = ({ navigation }) => {
   }
 
   const goToHistory = () => {
-    navigation.navigate("History", {transactions: account.history})
+    console.log(typeof account.history)
+    navigation.navigate("History", {history: account.history})
   }
 
   return (
