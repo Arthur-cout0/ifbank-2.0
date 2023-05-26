@@ -54,11 +54,11 @@ const Operation = ({ navigation }) => {
             <Text>Operation</Text>
             <View>
                 <Text>Saque</Text>
-                <OperationForm formAciton={() => {}}/>
+                <OperationForm  />
             </View>
             <View>
                 <Text>Depósito</Text>
-                <OperationForm formAction={() => {}}></OperationForm>
+                <OperationForm  />
             </View>
             <View><Text>Tranferência</Text></View>
         </View>

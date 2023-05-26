@@ -1,30 +1,31 @@
 import { Button, TextInput, View } from 'react-native';
 import { useState, useEffect } from 'react'
 
-export default function OperationForm ({action}) {
-
-    const [value, setValue] = useState('')
+export default function OperationForm ({formAction}) {
+    const [value, setValue] = useState("")
     const [buttonDisabled, setButtonDisabled] = useState(true)
 
-    const doOperation = () => {
-        action(value)
-        setValue('')
-    }
+    const validate = (newValue) => {
+        const asNumber = Number(newValue)
+        setButtonDisabled(asNumber === NaN || asNumber < 1)
+    } 
 
-    useEffect(() => {
-        if (typeof Number(value) === 'number') setButtonDisabled(false)
-    }, [])
+    const doOperation = () => {
+        console.log(value);
+        console.log('operacao')
+    }
 
     return (
         <View>
             <TextInput
                 value={value}
-                onChangeText={setValue}
+                onChangeText={(newValue) => {
+                    setValue(newValue);
+                    validate(newValue);
+                }}
                 placeholder='Digite o valor'
-                keyboardType='numeric'
-                inputMode='decimal'
             />
-            <Button title='Realizar Operação' onPress={doOperation()} disabled={buttonDisabled}/>
+            <Button title='Realizar Operação' onPress={doOperation} disabled={buttonDisabled}/>
         </View>
     )
 }
