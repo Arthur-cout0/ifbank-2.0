@@ -1,5 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
+import { getToday } from "../util/getToday";
 
 export const getAccount = async () => {
   const accountsCollection = collection(db, "accounts");
@@ -54,13 +55,21 @@ export const updateAccount = async (id, balance, history) => {
   });
 }
 
+const createTransaction = (type, value) => {
+  return {
+    type: type,
+    value: value,
+    date: getToday(),
+  }
+}
+
 export const accountDeposit = async (value) => {
 
   const account = await getAccount()
 
   console.log('depositou')
 
-  updateAccount(auth.currentUser.uid, account.balance + value, account.history)
+  updateAccount(auth.currentUser.uid, account.balance + value, [...account.history, createTransaction('deposit', value)])
 }
 
 export const accountWithdraw = async (value) => {

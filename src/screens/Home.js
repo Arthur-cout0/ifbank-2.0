@@ -22,11 +22,16 @@ const Home = ({ navigation }) => {
     navigation.navigate("Operation")
   }
 
+  const goToHistory = () => {
+    navigation.navigate("History", {transactions: account.history})
+  }
+
   return (
     <View>
       <Text>Home</Text>
       <View><Text>Saldo:</Text><Text>{account.balance}</Text></View>
       <Button title="Ir para Operation" onPress={goToOperation}/>
+      <Button title="Ir para History" onPress={goToHistory}/>
       <Button title="Ir para Profile" onPress={goToProfile}/>
     </View>
   );
