@@ -1,35 +1,26 @@
 import Transaction from "../components/Transaction";
 import { Button, Text, View } from "react-native";
 
-export default function History({route, navigation }) {
+export default function History({ route, navigation }) {
+  const { history } = route.params;
 
-    const { history } = route.params
+  console.log(history)
 
-    const toArray = (object) => {
-        const values = Object.values(object)
-        return values
-    }
+  const goToHome = () => {
+    navigation.navigate("Home");
+  };
 
-    const transactions = toArray(history)
-
-    console.log(transactions)
-
-    const goToHome = () => {
-        navigation.navigate("Home")
-    }
-
-    return (
+  return (
+    <View>
+      <View>
+        <Text>Transactions</Text>
         <View>
-            <View>
-                <Text>
-                    Transactions
-                </Text>
-                {
-                    transactions.map((transaction, index) => <Transaction object={transaction} key={index} />)
-                }
-            </View>
-            <Button title='Go to Home' onPress={goToHome}/>
+          {history.map((transaction, index) => (
+            <Transaction transaction={transaction} key={index} />
+          ))}
         </View>
-
-    )
+      </View>
+      <Button title="Go to Home" onPress={goToHome} />
+    </View>
+  );
 }

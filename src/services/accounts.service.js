@@ -78,5 +78,5 @@ export const accountWithdraw = async (value) => {
 
   console.log('sacou')
 
-  updateAccount(auth.currentUser.uid, account.balance - value, account.history)
+  updateAccount(auth.currentUser.uid, account.balance - value, [...account.history, createTransaction('withdraw', value)])
 }

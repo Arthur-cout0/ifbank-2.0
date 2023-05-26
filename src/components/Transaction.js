@@ -1,11 +1,12 @@
 import { Text, View } from "react-native";
 
-export default function Transaction ({ object }) {
+export default function Transaction ({ transaction }) {
+    console.log(transaction, '1')
     return (
         <View>
-            <Text>{object.type}</Text>
-            <Text>{object.value}</Text>
-            <Text>{object.date}</Text>
+            <Text>{transaction.type}</Text>
+            <Text>{transaction.value}</Text>
+            <Text>{transaction.date}</Text>
         </View>
     )
 }
