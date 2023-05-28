@@ -2,8 +2,14 @@ import { Text, View } from "react-native";
 import { getAuth, updateProfile, updateEmail } from "firebase/auth";
 import ActionForm from "../components/ActionForm";
 import validator from "validator";
+import { useFonts } from "expo-font";
 
 export default function ProfileChange({ navigation }) {
+  const [fontsLoaded] = useFonts({
+    "Inter-Bold": require("../assets/fonts/Inter-Bold.ttf"),
+    "Inter-Regular": require("../assets/fonts/Inter-Regular.ttf"),
+    "Inter-Medium": require("../assets/fonts/Inter-Medium.ttf"),
+  });
 
   const auth = getAuth()
 
@@ -27,9 +33,30 @@ export default function ProfileChange({ navigation }) {
   };
 
   return (
-    <View>
+    <View style={{
+      flex: 1,
+      backgroundColor: "#20A84F",
+      paddingHorizontal: 10,
+      paddingVertical: 20,
+      gap: 20,
+    }}>
+      <Text
+        style={{
+          alignSelf: "flex-end",
+          fontFamily: "Inter-Regular",
+          color: "#fff",
+          marginBottom: 10,
+        }}
+      >
+        IFBANK / EDITAR PERFIL
+      </Text>
+
       <View>
-        <Text>Alterar nome: </Text>
+        <Text style={{
+          fontFamily: "Inter-Bold",
+          color: "#fff",
+          fontSize: 24
+        }}>Alterar nome: </Text>
         <ActionForm
           action={updateDisplayName}
           screenBack={() => {}}

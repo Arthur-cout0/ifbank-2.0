@@ -4,11 +4,12 @@ import { auth } from "./src/firebase/config";
 import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from 'react';
 import { AccountProvider } from './src/contexts/accountContext';
+import { useFonts } from 'expo-font';
 
 export default function App() {
 
   const [user, setUser] = useState(auth.currentUser);
-
+ 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log("User logged in...");

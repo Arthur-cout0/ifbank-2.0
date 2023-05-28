@@ -12,11 +12,11 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Operation" component={Operation} />
-        <Stack.Screen name="History" component={History} />
-        <Stack.Screen name="ProfileChange" component={ProfileChange} />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+        <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
+        <Stack.Screen name="Operation" component={Operation} options={{headerShown: false}}/>
+        <Stack.Screen name="History" component={History} options={{headerShown: false}}/>
+        <Stack.Screen name="ProfileChange" component={ProfileChange} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
