@@ -125,8 +125,8 @@ const Register = ({ navigation }) => {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={goToLogin} style={{display: "flex", alignItems: "center", gap: 5}}>
-          <Text style={{fontFamily: 'Inter-Regular', color:"#fff" }}>Não tem uma conta?</Text>
-          <Text style={{fontFamily: 'Inter-Bold', color:"#fff" }}>Já tenho uma conta</Text>
+          <Text style={{fontFamily: 'Inter-Regular', color:"#fff" }}>Já tem uma conta?</Text>
+          <Text style={{fontFamily: 'Inter-Bold', color:"#fff" }}>Faça login</Text>
         </TouchableOpacity>
       </View>
     </View>
